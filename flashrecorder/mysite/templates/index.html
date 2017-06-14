@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Basic demo of FlashWavRecorder</title>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/swfobject.js"></script>
+    <script type="text/javascript" src="static/js/recorder.js"></script>
+    <script type="text/javascript" src="static/js/basic.js"></script>
+    <script type="text/javascript">
+        function getAudioBlod(){
+            var wavBlob = FWRecorder.getBlob("audio")
+            var audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = window.URL.createObjectURL(wavBlob);
+        }
+    </script>
+    <link type="text/css" rel="stylesheet" href="static/css/basic.css">
+    <style>
+
+        /* Styles for recorder buttons */
+        .recorder button, .recorder .upload, .level {
+            border: 1px solid #686868;
+            height: 30px;
+            background-color: white;
+            display: inline-block;
+            vertical-align: bottom;
+            margin: 2px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        /* Styles for level indicator - required! */
+        .level {
+            width: 30px;
+            height: 30px;
+            position: relative;
+        }
+        .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #b10000;
+        }
+         #test{
+            border-style:hidden;
+            display: inline-block;
+        }
+        .test{
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            filter:alpha(Opacity=50);
+            -moz-opacity:0.5;
+            opacity: 0.5;
+            wmode: transparent;
+        }
+
+        #flashcontent {
+            border:1px solid #00F;
+            border-style:hidden;
+            padding-top: 4px;
+            display: inline-block;
+            border-color:#aaa
+filter:alpha(Opacity=50);-moz-opacity:0.5;opacity: 0.5;
+            wmode: transparent;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><span class="basic">Basic demo of</span><span class="project-name">FlashWavRecorder</span></h1>
+    <section class="recorder-container">
+
+        <!-- Recorder control buttons -->
+        <div class="recorder">
+            <button class="start-recording" onclick="FWRecorder.record('audio', 'audio.wav');">
+                <img src="static/images/record.png" alt="Record">
+            </button>
+            <div class="level">
+                <div class="progress"></div>
+            </div>
+            <button class="stop-recording" onclick="FWRecorder.stopRecording('audio');">
+                <img src="static/images/stop.png" alt="Stop Recording"/>
+            </button>
+            <button class="start-playing" onclick="FWRecorder.playBack('audio');" title="Play">
+                <img src="static/images/play.png" alt="Play"/>
+            </button>
+            <div id="test"  class="test">
+                <div id="flashcontent"  class="upload">
+                    <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
+                </div>
+
+            </div>
+            <embed id="flashcontent1" style="width:20px; height:20px;" src="static/swf/recorder.swf" flashvars="upload_image=static/images/mic.png">
+                <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
+            </embed>
+        </div>
+
+        <!-- Hidden form for easy specifying the upload request parameters -->
+        <form id="uploadForm" name="uploadForm" action="../upload.php">
+            <input name="authenticity_token" value="xxxxx" type="hidden">
+            <input name="upload_file[parent_id]" value="1" type="hidden">
+            <input name="format" value="json" type="hidden">
+        </form>
+    </section>
+    <div>
+        <button class="getAudioBlod" onclick="getAudioBlod();" title="Play">
+            <img src="static/images/play.png" alt="Play"/>
+        </button>
+        <audio class="basic" id="audioPlayer" src="static/ogg/SleepAway.mp3" controls="controls">
+            您的浏览器不支持 audio 标签。
+        </audio>
+    </div>
+</div>
+
+</body>
+</html>

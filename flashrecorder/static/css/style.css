@@ -1,0 +1,30 @@
+
+/* Styles for recorder buttons */
+.recorder button, .recorder .upload, .level {
+    border: 1px solid #686868;
+    height: 30px;
+    background-color: white;
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 2px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+/* Styles for level indicator - required! */
+.level {
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #b10000;
+}
+.upload {
+    padding-top: 2px;
+}
+
