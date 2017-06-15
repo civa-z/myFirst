@@ -1,40 +1,60 @@
 $(function(){
-    var RecorderWrapper = function{
-        var Recorder = this;
-        Recorder.onStatusUpdate = on_status_update;
-        Recorder.start = start;
-        Recorder.stop = stop;
+    var RecorderWrapper = this;
+    RecorderWrapper.onStatusUpdate = on_status_update;
+    RecorderWrapper.start = start;
+    RecorderWrapper.stop = stop;
+    RecorderWrapper.registerWavDataCallback = register_wav_data_callback;
 
-        Recorder.recorder = ContextAudioRecorder(Recorder.onStatusUpdate);
-        if (!Recorder.initialize())
-            Recorder = none;
+    RecorderWrapper.recorder = ContextAudioRecorder(RecorderWrapper.onStatusUpdate);
+    if (!RecorderWrapper.recorder.initialize())
+        RecorderWrapper.recorder = none;
 
+    // test data start
+    var context_recorder = document.getElementById("context-recorder");
+    context_recorder.onmousedown = RecorderWrapper.start;
+    context_recorder.onmouseup = RecorderWrapper.stop;
+    RecorderWrapper.registerWavDataCallback(on_wav_data);
 
-        function on_status_update(e){
-            switch (e.status){
-                case "ready":
-                    break;
-                case "record_finish":
-                    break;
-                case "error":
-                    break;
-            }
-        }
-
-        function start(){
-            Recorder.recorder && Recorder.recorder.start();
-        }
-
-        function stop(){
-            Recorder.recorder && Recorder.recorder.stop();
-        }
-
-        function on_wav_data(wavData){
-            var wavBlob = new Blob(wavData, {type: "audio/wav"})
-            document.getElementByID("audio_wav").src = window.createUrl(wavBlob);
-        }
-
-
+    function on_wav_data(){
+        var wavData = RecorderWrapper.recorder.getWavData();
+        var wavBlob = new Blob(wavData, {type: "audio/wav"});
+        var wavUrl = window.URL.createObjectURL(wavBlob);
+        /*var audio_wav_link = document.getElementById("audio-wav-link");
+        audio_wav_link.href = wavUrl;
+        audio_wav_link.download = "audio-wav-link.wav";
+        audio_wav_link.click();
+        window.URL.revokeObjectURL(audio_wav_link);*/
+        document.getElementById("audio-wav").src = wavUrl;
     }
-    window.RecorderWrapper = RecorderWrapper;
+    // test data end
+
+    function on_status_update(e){
+        switch (e.status){
+            case "ready":
+                console.log("RecorderWrapper on_status_update ready" );
+                break;
+            case "record_finish":
+                console.log("RecorderWrapper on_status_update record_finish" );
+                RecorderWrapper.onWavData();
+                break;
+            case "error":
+                console.log("RecorderWrapper on_status_update error: " + e.status);
+                break;
+        }
+    }
+
+    function start(){
+        console.log("RecorderWrapper start");
+        RecorderWrapper.recorder && RecorderWrapper.recorder.start();
+    }
+
+    function stop(){
+        console.log("RecorderWrapper stop");
+        RecorderWrapper.recorder && RecorderWrapper.recorder.stop();
+    }
+
+    function register_wav_data_callback(onWavData){
+        console.log("RecorderWrapper register_wav_data_callback");
+        RecorderWrapper.onWavData = onWavData;
+    }
 });

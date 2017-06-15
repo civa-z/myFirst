@@ -57,8 +57,29 @@
             position:absolute;
             padding:2px;
             border-radius: 2px;
+            z-index:999999;
+        }
+        .audio-box{
+            width:500px;
+            height: 50px;
+            border: 1px solid #686868;
+            margin: 2px;
+            padding:2px;
+            box-sizing: border-box;
+            text-align:justify;
+            vertical-align: middle;
+            display: flex;
+            justify-content:center;
+            align-items:Center;
+
+        }
+        .audio-text{
         }
 
+        .audio0{
+            position:relative;
+            border: 1px solid #686868;
+        }
     </style>
 </head>
 <body>
@@ -88,13 +109,33 @@
             </div>
         </div>
     </section>
-    <div>
-        <button class="getAudioBlod" onclick="getAudioBlod();" title="Play">
-            <img src="static/images/play.png" alt="Play"/>
+
+    <script type="text/javascript" src="static/js/context-audio-recorder/context-audio-recorder.js"></script>
+    <script type="text/javascript" src="static/js/recorder-wrapper.js"></script>
+    <section class="recorder-container">
+        <button class="stop-recording" id="context-recorder">
+            <img src="static/images/mic.png"/>
         </button>
-        <audio class="basic" id="audioPlayer" src="static/audio/test.mp3" controls="controls">
-            您的浏览器不支持 audio 标签。
-        </audio>
+    </section>
+
+    <div align="center">
+        <div class="audio-box">
+            <p0 class="audio-text">audio-wav</p0>
+            <Audio class = "audio0" id="audio-wav"  src="/static/audio/test.wav" controls="controls">No suport wav type</Audio>
+            <a id="audio-wav-link" href="http://www.microsoft.com/">audio-wav</a>
+        </div>
+        <div class="audio-box">
+            <p0 class="audio-text">audio-mp3</p0>
+            <Audio class = "audio0" id="audio-mp3"  src="/static/audio/test.mp3" controls="controls">No suport mp3 type</Audio>
+        </div>
+        <div class="audio-box">
+            <p0 class="audio-text">audio-flac</p0>
+            <Audio class = "audio0" id="audio-flac"  src="/static/audio/test.flac" controls="controls">No suport flac type</Audio>
+        </div>
+        <div class="audio-box">
+            <p0 class="audio-text">audio-ogg</p0>
+            <Audio class = "audio0" id="audio-ogg"  src="/static/audio/test.ogg" controls="controls">No suport ogg type</Audio>
+        </div>
     </div>
 </div>
 
