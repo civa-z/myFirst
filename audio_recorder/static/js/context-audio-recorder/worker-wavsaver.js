@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     var int16DataBuffer;
-    var downSampleRate = 1;
+    var downSampleRate = 3;
 
     var clearBuffer = function() {
         int16DataBuffer = [];

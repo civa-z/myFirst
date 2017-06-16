@@ -17,13 +17,8 @@ $(function(){
 
     function on_wav_data(){
         var wavData = RecorderWrapper.recorder.getWavData();
-        var wavBlob = new Blob(wavData, {type: "audio/wav"});
+        var wavBlob = new Blob([wavData], {type: "audio/wav"});
         var wavUrl = window.URL.createObjectURL(wavBlob);
-        /*var audio_wav_link = document.getElementById("audio-wav-link");
-        audio_wav_link.href = wavUrl;
-        audio_wav_link.download = "audio-wav-link.wav";
-        audio_wav_link.click();
-        window.URL.revokeObjectURL(audio_wav_link);*/
         document.getElementById("audio-wav").src = wavUrl;
     }
     // test data end
