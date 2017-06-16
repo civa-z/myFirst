@@ -1,5 +1,5 @@
 """
-WSGI config for flashrecorder project.
+WSGI config for audiorecorder project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flashrecorder.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "audiorecorder.settings")
 
 application = get_wsgi_application()

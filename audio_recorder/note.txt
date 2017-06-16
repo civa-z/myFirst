@@ -1,9 +1,9 @@
-python C:\Anaconda2\Lib\site-packages\django\bin\django-admin.py startproject flashrecorder
+python C:\Anaconda2\Lib\site-packages\django\bin\django-admin.py startproject audiorecorder
 
-cd flashrecorder
+cd audiorecorder
 
 Update allowed hosts:
-	flashrecorder/settings.py
+	audiorecorder/settings.py
 	ALLOWED_HOSTS = []
 	-->
 	ALLOWED_HOSTS = ["*"]
@@ -13,7 +13,7 @@ python manage.py runserver 43.82.40.114:8000
 python manage.py startapp mysite
 
 Add mysite to settings:
-	flashrecorder/settings.py
+	audiorecorder/settings.py
 	INSTALLED_APPS = [
 	...
 		'mysite',
@@ -38,7 +38,7 @@ Add mysite page enttrnce to mysite/views.py
 		return render(request, 'index.html')
 
 Add mysite/views.mysite to url pattern
-	flashrecorder/urls.py
+	audiorecorder/urls.py
 	from mysite import views
 	urlpatterns = [
 		url(r'^admin/', admin.site.urls),
