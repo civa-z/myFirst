@@ -15,6 +15,8 @@
 
     <section class="recorder-container">
         <script type="text/javascript" src="static/js/flash-audio-recorder/jquery.js"></script>
+        <script type="text/javascript" src="static/js/flash-audio-recorder/swfobject.js"></script>
+        <script type="text/javascript" src="static/js/flash-audio-recorder/flash-audio-recorder.js"></script>
         <script type="text/javascript" src="static/js/context-audio-recorder/context-audio-recorder.js"></script>
         <script type="text/javascript" src="static/js/recorder-wrapper.js"></script>
         <button class="stop-recording" id="context-recorder">
@@ -23,21 +25,15 @@
     </section>
 
     <section class="recorder-container">
-
-        <script type="text/javascript" src="static/js/flash-audio-recorder/swfobject.js"></script>
-        <script type="text/javascript" src="static/js/flash-audio-recorder/recorder.js"></script>
-        <script type="text/javascript" src="static/js/flash-audio-recorder/basic.js"></script>
         <!-- Recorder control buttons -->
         <div class="recorder">
-            <button class="start-recording" onmousedown="FWRecorder.record('audio', 'audio.wav');" onmouseup="FWRecorder.stopRecording('audio');">
+            <button class="flash-recorder" id="flash-recorder">
                 <img src="static/images/record.png" alt="Record">
             </button>
             <div class="level">
                 <div class="progress"></div>
             </div>
-            <button class="start-playing" onclick="FWRecorder.playBack('audio');" title="Play">
-                <img src="static/images/play.png" alt="Play"/>
-            </button>
+
             <div id="flashcontentwrapper">
                 <div id="flashcontent" >
                     <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>

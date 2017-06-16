@@ -1,5 +1,5 @@
 (function (){
-        window.ContextAudioRecorder = function(onStatusUpdate){
+    window.ContextAudioRecorder = function(onStatusUpdate){
         // capture audio content (not work for IE)
         var Recorder = this;
         var config = {bitRate: 128};
@@ -107,7 +107,7 @@
         function get_wav_data(){
             wavData_ = wavData;
             wavData = null;
-            return wavData_;
+            return [wavData_];
         }
 
        function log(str) {

@@ -1,58 +1,65 @@
 $(function(){
-    var RecorderWrapper = this;
-    RecorderWrapper.onStatusUpdate = on_status_update;
-    RecorderWrapper.start = start;
-    RecorderWrapper.stop = stop;
-    RecorderWrapper.registerWavDataCallback = register_wav_data_callback;
+    var RecorderWrapper = function(){
+        Recorder = this;
+        Recorder.onStatusUpdate = on_status_update;
+        Recorder.start = start;
+        Recorder.stop = stop;
+        Recorder.registerWavDataCallback = register_wav_data_callback;
 
-    RecorderWrapper.recorder = ContextAudioRecorder(RecorderWrapper.onStatusUpdate);
-    if (!RecorderWrapper.recorder.initialize()){
-        RecorderWrapper.recorder = FlashAudioRecorder(RecorderWrapper.onStatusUpdate);
-        RecorderWrapper.recorder.initialize();
-    }
-
-
-    // test data start
-    var context_recorder = document.getElementById("context-recorder");
-    context_recorder.onmousedown = RecorderWrapper.start;
-    context_recorder.onmouseup = RecorderWrapper.stop;
-    RecorderWrapper.registerWavDataCallback(on_wav_data);
-
-    function on_wav_data(){
-        var wavData = RecorderWrapper.recorder.getWavData();
-        var wavBlob = new Blob([wavData], {type: "audio/wav"});
-        var wavUrl = window.URL.createObjectURL(wavBlob);
-        document.getElementById("audio-wav").src = wavUrl;
-    }
-    // test data end
-
-    function on_status_update(e){
-        switch (e.status){
-            case "ready":
-                console.log("RecorderWrapper on_status_update ready" );
-                break;
-            case "record_finish":
-                console.log("RecorderWrapper on_status_update record_finish" );
-                RecorderWrapper.onWavData();
-                break;
-            case "error":
-                console.log("RecorderWrapper on_status_update error: " + e.status);
-                break;
+        //Recorder.recorderInstance = ContextAudioRecorder(Recorder.onStatusUpdate);
+        if (!Recorder.recorderInstance || !Recorder.recorderInstance.initialize()){
+            Recorder.recorderInstance = FlashAudioRecorder(Recorder.onStatusUpdate);
+            Recorder.recorderInstance.initialize();
         }
-    }
 
-    function start(){
-        console.log("RecorderWrapper start");
-        RecorderWrapper.recorder && RecorderWrapper.recorder.start();
-    }
+        // test data start
+        var context_recorder = document.getElementById("context-recorder");
+        context_recorder.onmousedown = Recorder.start;
+        context_recorder.onmouseup = Recorder.stop;
 
-    function stop(){
-        console.log("RecorderWrapper stop");
-        RecorderWrapper.recorder && RecorderWrapper.recorder.stop();
-    }
+        var flash_recorder = document.getElementById("flash-recorder");
+        flash_recorder.onmousedown = Recorder.start;
+        flash_recorder.onmouseup = Recorder.stop;
 
-    function register_wav_data_callback(onWavData){
-        console.log("RecorderWrapper register_wav_data_callback");
-        RecorderWrapper.onWavData = onWavData;
-    }
+        Recorder.registerWavDataCallback(on_wav_data);
+        function on_wav_data(){
+            var wavData = Recorder.recorderInstance.getWavData();
+            var wavBlob = new Blob(wavData, {type: "audio/wav"});
+            var wavUrl = window.URL.createObjectURL(wavBlob);
+            document.getElementById("audio-wav").src = wavUrl;
+        }
+        // test data end
+
+        function on_status_update(e){
+            switch (e.status){
+                case "ready":
+                    console.log("Recorder on_status_update ready" );
+                    break;
+                case "record_finish":
+                    console.log("Recorder on_status_update record_finish" );
+                    Recorder.onWavData();
+                    break;
+                case "error":
+                    console.log("Recorder on_status_update error: " + e.status);
+                    break;
+            }
+        }
+
+        function start(){
+            console.log("Recorder start");
+            Recorder.recorderInstance && Recorder.recorderInstance.start();
+        }
+
+        function stop(){
+            console.log("Recorder stop");
+            Recorder.recorderInstance && Recorder.recorderInstance.stop();
+        }
+
+        function register_wav_data_callback(onWavData){
+            console.log("Recorder register_wav_data_callback");
+            Recorder.onWavData = onWavData;
+        }
+    };
+    window.RecorderWrapper = RecorderWrapper;
+    window.RecorderWrapper();
 });
