@@ -32,6 +32,7 @@
           Recorder.recorder.init(frm.attr('action').toString(), Recorder.uploadFieldName, frm.serializeArray());
         }*/
         Recorder.recorder.show();
+        Recorder.showPermissionWindow();
         return;
       }
 

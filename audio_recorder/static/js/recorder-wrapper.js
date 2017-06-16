@@ -6,8 +6,11 @@ $(function(){
     RecorderWrapper.registerWavDataCallback = register_wav_data_callback;
 
     RecorderWrapper.recorder = ContextAudioRecorder(RecorderWrapper.onStatusUpdate);
-    if (!RecorderWrapper.recorder.initialize())
-        RecorderWrapper.recorder = none;
+    if (!RecorderWrapper.recorder.initialize()){
+        RecorderWrapper.recorder = FlashAudioRecorder(RecorderWrapper.onStatusUpdate);
+        RecorderWrapper.recorder.initialize();
+    }
+
 
     // test data start
     var context_recorder = document.getElementById("context-recorder");

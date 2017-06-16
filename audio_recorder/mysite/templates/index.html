@@ -3,95 +3,38 @@
 <head>
     <meta charset="utf-8">
     <title>Basic demo of FlashWavRecorder</title>
-    <script type="text/javascript" src="static/js/jquery.js"></script>
-    <script type="text/javascript" src="static/js/swfobject.js"></script>
-    <script type="text/javascript" src="static/js/recorder.js"></script>
-    <script type="text/javascript" src="static/js/basic.js"></script>
     <link type="text/css" rel="stylesheet" href="static/css/basic.css">
-    <style>
+    <link type="text/css" rel="stylesheet" href="static/css/style.css">
 
-        /* Styles for recorder buttons */
-        .recorder button, .level {
-            border: 1px solid #686868;
-            height: 30px;
-            background-color: white;
-            display: inline-block;
-            vertical-align: bottom;
-            margin: 2px;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
-
-        /* Styles for level indicator - required! */
-        .level {
-            width: 30px;
-            height: 30px;
-            position: relative;
-        }
-        .progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #880042;
-        }
-        #flashcontentwrapper, #flashcontent{
-            box-sizing: border-box;
-            margin: 4px;
-            width: auto;
-            height: auto;
-            border-style:hidden;
-            display: inline-block;
-
-            background-color:#99F;
-            /*filter:alpha(Opacity=50);
-            -moz-opacity:0.5;
-            opacity: 0.5;*/
-            position:absolute;
-            padding:2px;
-            border-radius: 2px;
-            z-index:999999;
-        }
-        .audio-box{
-            width:500px;
-            height: 50px;
-            border: 1px solid #686868;
-            margin: 2px;
-            padding:2px;
-            box-sizing: border-box;
-            text-align:justify;
-            vertical-align: middle;
-            display: flex;
-            justify-content:center;
-            align-items:Center;
-
-        }
-        .audio-text{
-        }
-
-        .audio0{
-            position:relative;
-            border: 1px solid #686868;
-        }
-    </style>
 </head>
 <body>
 
 <div class="container">
+
     <h1><span class="basic">Basic demo of</span><span class="project-name">FlashWavRecorder</span></h1>
+
+    <section class="recorder-container">
+        <script type="text/javascript" src="static/js/flash-audio-recorder/jquery.js"></script>
+        <script type="text/javascript" src="static/js/context-audio-recorder/context-audio-recorder.js"></script>
+        <script type="text/javascript" src="static/js/recorder-wrapper.js"></script>
+        <button class="stop-recording" id="context-recorder">
+            <img src="static/images/mic.png"/>
+        </button>
+    </section>
+
     <section class="recorder-container">
 
+        <script type="text/javascript" src="static/js/flash-audio-recorder/swfobject.js"></script>
+        <script type="text/javascript" src="static/js/flash-audio-recorder/recorder.js"></script>
+        <script type="text/javascript" src="static/js/flash-audio-recorder/basic.js"></script>
         <!-- Recorder control buttons -->
         <div class="recorder">
-            <button class="start-recording" onclick="FWRecorder.record('audio', 'audio.wav');">
+            <button class="start-recording" onmousedown="FWRecorder.record('audio', 'audio.wav');" onmouseup="FWRecorder.stopRecording('audio');">
                 <img src="static/images/record.png" alt="Record">
             </button>
             <div class="level">
                 <div class="progress"></div>
             </div>
-            <button class="stop-recording" onclick="FWRecorder.stopRecording('audio');">
-                <img src="static/images/stop.png" alt="Stop Recording"/>
-            </button>
             <button class="start-playing" onclick="FWRecorder.playBack('audio');" title="Play">
                 <img src="static/images/play.png" alt="Play"/>
             </button>
@@ -103,13 +46,7 @@
         </div>
     </section>
 
-    <script type="text/javascript" src="static/js/context-audio-recorder/context-audio-recorder.js"></script>
-    <script type="text/javascript" src="static/js/recorder-wrapper.js"></script>
-    <section class="recorder-container">
-        <button class="stop-recording" id="context-recorder">
-            <img src="static/images/mic.png"/>
-        </button>
-    </section>
+
 
     <div align="center">
         <div class="audio-box">
