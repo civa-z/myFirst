@@ -1,0 +1,4 @@
+save image from the images list
+docker save image-name > saved-image-name
+load archived image file
+docker load -i saved-image-name
