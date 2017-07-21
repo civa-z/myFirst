@@ -1,0 +1,7 @@
+Window7-64
+
+Install Anaconda3
+Anaconda3-4.2.0 (Python 3.5)
+https://repo.continuum.io/archive/.winzip/Anaconda3-4.2.0-Windows-x86_64.zip
+
+Install opencv3

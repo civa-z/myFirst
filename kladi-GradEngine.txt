@@ -1,0 +1,48 @@
+
+1. 使用apt-get install gridengine-master gridengine-client之后运行qconf命令发现以下错误：
+qconf -am zwm
+error: commlib error: access denied (client IP resolved to host name "localhost". This is not identical to clients host name "mard1-HP-Z840-Workstation")
+ERROR: unable to contact qmaster using port 6444 on host "mard1-HP-Z840-Workstation"
+	这是因为安装过程中要输入选择的master host name时，输入了错误的master host name，使用命令dpkg-reconfigure gridengine-master进行修正
+	此处的master host name是gridengine master节点的计算机名称，在master主机上使用 uname -a可以取得对应的计算机名称
+
+Install:
+
+
+Master node:
+step 1. 配置apt代理服务器,连接外网:
+/etc/apt/apt.conf
+
+step 2. 配置hosts:
+将所有node的IP和主机名映射添加到host文件中
+/etc/hosts
+	127.0.0.1       localhost.localdomain localhost
+	43.82.40.25     mard1-HP-Z840-Workstation
+	43.82.40.44     SCRL-MARD2-DL580
+	43.82.40.45     SCRL-MARD2-Z820-45
+	
+step 3.安装gridengine
+sudo apt-get install gridengine-master gridengine-client
+
+如果同时需要master node做运算：
+apt-get install gridengine-master gridengine-client gridengine-exec
+
+exec node:
+step 1,2同Master node
+
+step 3 安装gridengine
+sudo apt-get install gridengine-client gridengine-exec
+
+Check installation：
+在master node上输入命令 qhost：
+HOSTNAME                ARCH         NCPU  LOAD  MEMTOT  MEMUSE  SWAPTO  SWAPUS
+-------------------------------------------------------------------------------
+global                  -               -     -       -       -       -       -
+SCRL-MARD2-DL580        lx26-amd64     80     -  755.8G       -  256.0G       -
+SCRL-MARD2-Z820-45      lx26-amd64      8     -  251.9G       -  238.4G       -
+
+如不能显示所有运算node的信息，请尝试一次重启exec node 和 master mode
+exec node restart：
+/etc/init.d/gridengine-exec restart
+master node restart：
+/etc/init.d/gridengine-master restart
