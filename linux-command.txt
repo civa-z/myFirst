@@ -1,1 +1,3 @@
 scp test.flac zhangwenming@43.82.40.25:/home/zhangwenming/work
+
+awk -F'[ ]' 'NR==FNR{a[$1]} NR>FNR{if($1 in a) print $0}' file1.log file2.log > c.txt
