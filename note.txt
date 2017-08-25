@@ -66,7 +66,7 @@ time ./lines_cpu
 
 g++ -std=c++11 vsd_hand_dnn_python_wrapper.cpp -o vsd_hand_dnn_python_wrapper.out -I/usr/include/python2.7/ -lpython2.7
 
-pip --proxy http://5109U11454:1q2w3e4rASDF@43.82.218.50:8080 install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.10.0-cp27-none-linux_x86_64.whl
+pip --proxy http://5109U11454:1234qwerASDF@43.82.218.50:8080 install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.10.0-cp27-none-linux_x86_64.whl
 
 git server:
 	http://43.82.40.24/zwm/release_ego_centric_demo
