@@ -1,3 +1,14 @@
 scp test.flac zhangwenming@43.82.40.25:/home/zhangwenming/work
 
 awk -F'[ ]' 'NR==FNR{a[$1]} NR>FNR{if($1 in a) print $0}' file1.log file2.log > c.txt
+
+
+
+#统计每行的最大的数值
+#13 0.00166766 0.00148792 0.0042434 0.00792859 0.00587032 0.0432385 0.0900859 0.199239 0.00671674 0.00129265 0.000986341 0.0295886 0.607654
+#13 0.00156347 0.00180256 0.00268097 0.00917123 0.00613261 0.0358785 0.0802725 0.15235 0.0123796 0.00192217 0.00099959 0.049492 0.645354
+cat 1_scale.test | awk '{max = $2; for(i = 3; i <= NF; ++i){if (max < $i){max = $i}} print max}'
+
+#合并两个文件的第一列
+awk 'NR==FNR{a[NR]=$1;next}{print a[FNR], $1}' subject1-16-select-scale.test subject1-16-select-scale.groundtruth > test_groundtruth
+
