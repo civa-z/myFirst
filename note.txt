@@ -1,0 +1,29 @@
+
+3. Printer:
+	KM-SCRL-7F-C308-01
+
+4. share server:
+	\\bjpfss02\issg-bj\software\install
+	
+7. Svn
+	svn://43.82.40.45/scrl_cnn_decoder
+	wenming.zhang
+	wenming.zhang
+
+8. Ftp share folder
+	\\43.82.40.35
+
+nslookup alanis.ixd.sony.co.jp
+
+https://spl-nvlabs.qwiklab.com/focuses/37
+	SMVvH8SGFn57
+	KDsFk2bLt8
+
+	
+	!g++ task1/lines_cpu.cpp -lopencv_core -lopencv_highgui -lopencv_imgproc -o lines_cpu && echo "Compiled Successfully"
+	./lines_cpu
+time ./lines_cpu
+
+
+git server:
+	http://43.82.40.24/zwm/release_ego_centric_demo
